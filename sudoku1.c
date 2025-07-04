@@ -87,6 +87,7 @@ void printBoard(int board[9][9])
 
 int main() {
     int board[9][9];
+    printf("Sudoko Solver\n");
     printf("ENTER THE SUDOKO PUZZLE WITH 0 AS THE EMPTY PLACES:\n");
 
     for(int i=0; i<9; i++){
