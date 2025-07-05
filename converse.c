@@ -1,3 +1,7 @@
+
+         //BASE CONVERTOR PROGRAM IN C
+//This program converts numbers between different bases: decimal, binary,octal,hexadecimal,BCD and gray code.
+// It uses a stack data structure to reverse strings and perform conversions.
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -12,29 +16,29 @@ typedef struct {                                            //typedefinition
 } Stack;
 
 void initialize(Stack* stack) {
-    stack->top = -1;
+    stack->top = -1;                            
 }
 
 int isFull(Stack* stack) {
-    return stack->top == MAX_STACK_SIZE - 1;
+    return stack->top == MAX_STACK_SIZE - 1;            //Check if stack is FULl
 }
 
 int isEmpty(Stack* stack) {
-    return stack->top == -1;
+    return stack->top == -1;                            //Check if stack is empty
 }
 
 void push(Stack* stack, char item) {
     if (isFull(stack)) {
         return;
     }
-    stack->data[++stack->top] = item;
+    stack->data[++stack->top] = item;                   //Push item onto stack
 }
 
 char pop(Stack* stack) {
     if (isEmpty(stack)) {
         return '\0'; // Return null character for empty stack
     }
-    return stack->data[stack->top--];
+    return stack->data[stack->top--];                  //Pop item from stack
 }
 
 void reversestring(char* str) {
@@ -47,7 +51,7 @@ void reversestring(char* str) {
     }
 
     for (int i = 0; i < length; i++) {
-        str[i] = pop(&stack);
+        str[i] = pop(&stack);                         //Reverse a string using stack
     }
 }
 
