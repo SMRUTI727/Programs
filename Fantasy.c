@@ -1,3 +1,5 @@
+// This is the game known as Fantasy, which is a simple number guessing game.
+
 #include<stdio.h>
 #include<math.h>
 #include <stdlib.h>
