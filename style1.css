@@ -1,0 +1,86 @@
+*{
+    margin:0;
+    padding:0;
+   
+}
+
+
+
+body{
+    background-color:beige;
+}
+
+#navbar{
+    
+    height:60px;
+    background-color:#0f1111;
+    
+}
+#Search{
+    color:white;
+    
+}
+#logo{
+    color:#f08804;
+    font-size: 25px;
+}
+
+button{
+    background-color:#f08804;
+}
+.nav{
+    margin-right:200px;
+    text-decoration:none;
+}
+#nav2{
+    margin-right: 50px;
+    color:white;
+    font-size:15px ;
+    text-decoration:none;
+}
+#navbar2{
+    height:35px;
+    background-color:darkcyan;
+    
+}
+.content{
+    width:200px;
+    height:150px;
+    border-width:10px;
+    border-color: black;
+    border-style:double;
+    display:inline-block;
+}
+#one{
+    background-color:rgba(255,0,0,0.5);
+}
+#two{
+    background-color:rgba(255,255,0,0.5);
+}
+#three{
+    background-color:rgba(255,0,255,0.5);
+}
+#four{
+    background-color:rgba(255,0,255,0.75);
+}
+#five{
+    background-color:rgba(255,255,0,0.25);
+}
+#six{
+    background-color:rgba(255,0,0,0.25);
+}
+#seven{
+    background-color:rgba(55, 255, 0, 0.943);
+}
+#eight{
+    background-color:rgba(0, 115, 255, 0.42);
+}
+#nine{
+    background-color:rgba(255, 0, 153, 0.263);
+}
+
+footer{
+    color:white;
+    text-align:center;
+    background-color:#0f1111;
+}
