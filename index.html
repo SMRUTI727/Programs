@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Login System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            display: flex;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            width: 800px;
+            max-width: 90%;
+        }
+
+        .login-container {
+            padding: 40px;
+            width: 50%;
+            background-color: white;
+        }
+
+        .welcome-message {
+            width: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo i {
+            font-size: 50px;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .logo h1 {
+            font-size: 28px;
+            color: #333;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .input-group i {
+            position: absolute;
+            left: 15px;
+            top: 15px;
+            color: #999;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 15px 15px 45px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .input-group input:focus {
+            border-color: #667eea;
+            outline: none;
+        }
+
+        .password-strength {
+            margin-top: -10px;
+            margin-bottom: 20px;
+            font-size: 12px;
+            height: 4px;
+            background-color: #eee;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .password-strength-bar {
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s, background-color 0.3s;
+        }
+
+        .strength-weak { background-color: #ff4757; width: 33%; }
+        .strength-medium { background-color: #ffa502; width: 66%; }
+        .strength-strong { background-color: #2ed573; width: 100%; }
+
+        .options {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .options label {
+            display: flex;
+            align-items: center;
+            color: #666;
+        }
+
+        .options input[type="checkbox"] {
+            margin-right: 5px;
+        }
+
+        .options a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .options a:hover {
+            text-decoration: underline;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(to right, #667eea, #764ba2);
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        .login-btn:hover {
+            opacity: 0.9;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+            color: #999;
+            font-size: 14px;
+        }
+
+        .divider::before, .divider::after {
+            content: "";
+            flex: 1;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .divider span {
+            padding: 0 10px;
+        }
+
+        .social-login {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .social-btn {
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+        }
+
+        .social-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .social-btn i {
+            margin-right: 10px;
+            font-size: 16px;
+        }
+
+        .google {
+            background-color: #db4437;
+            color: white;
+        }
+
+        .facebook {
+            background-color: #4267B2;
+            color: white;
+        }
+
+        .signup-link {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .signup-link a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+
+        .welcome-message h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .welcome-message p {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .dashboard {
+            display: none;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .dashboard h2 {
+            margin-bottom: 20px;
+        }
+
+        .logout-btn {
+            padding: 10px 20px;
+            background: #ff4757;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Error Message Styling */
+        .error-message {
+            color: #ff4757;
+            background-color: #fff5f5;
+            border: 1px solid #ffcccc;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: none;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                width: 90%;
+            }
+
+            .login-container, .welcome-message {
+                width: 100%;
+            }
+
+            .welcome-message {
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Login Form -->
+        <div class="login-container" id="loginForm">
+            <div class="logo">
+                <i class="fas fa-lock"></i>
+                <h1>Login</h1>
+            </div>
+
+            <div class="error-message" id="loginError"></div>
+
+            <form id="login">
+                <div class="input-group">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="username" placeholder="Username" required>
+                </div>
+
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="password" placeholder="Password" required oninput="checkPasswordStrength(this.value)">
+                </div>
+
+                <div class="password-strength">
+                    <div class="password-strength-bar" id="strengthBar"></div>
+                </div>
+
+                <div class="options">
+                    <label>
+                        <input type="checkbox" id="remember"> Remember me
+                    </label>
+                    <a href="#" id="forgotPassword">Forgot password?</a>
+                </div>
+
+                <button type="submit" class="login-btn">Login</button>
+
+                <div class="divider">
+                    <span>or</span>
+                </div>
+
+                <div class="social-login">
+                    <button class="social-btn google">
+                        <i class="fab fa-google"></i> Login with Google
+                    </button>
+                    <button class="social-btn facebook">
+                        <i class="fab fa-facebook-f"></i> Login with Facebook
+                    </button>
+                </div>
+
+                <p class="signup-link">Don't have an account? <a href="#" id="showRegister">Sign up</a></p>
+            </form>
+        </div>
+
+        <!-- Register Form (Hidden by Default) -->
+        <div class="login-container" id="registerForm" style="display: none;">
+            <div class="logo">
+                <i class="fas fa-user-plus"></i>
+                <h1>Register</h1>
+            </div>
+
+            <div class="error-message" id="registerError"></div>
+
+            <form id="register">
+                <div class="input-group">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="regUsername" placeholder="Username (min 4 chars)" required>
+                </div>
+
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="regPassword" placeholder="Password (min 8 chars)" required oninput="checkPasswordStrength(this.value)">
+                </div>
+
+                <div class="password-strength">
+                    <div class="password-strength-bar" id="regStrengthBar"></div>
+                </div>
+
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+                </div>
+
+                <button type="submit" class="login-btn">Register</button>
+
+                <p class="signup-link">Already have an account? <a href="#" id="showLogin">Login</a></p>
+            </form>
+        </div>
+
+        <!-- Welcome Message -->
+        <div class="welcome-message">
+            <h2>Welcome Back!</h2>
+            <p>Please login to access your account and continue where you left off.</p>
+        </div>
+    </div>
+
+    <!-- Dashboard (Hidden by Default) -->
+    <div class="dashboard" id="dashboard">
+        <h2>Welcome, <span id="usernameDisplay"></span>!</h2>
+        <p>You have successfully logged in.</p>
+        <button class="logout-btn" id="logout">Logout</button>
+    </div>
+
+    <script>
+        // Database Simulation (localStorage)
+        const users = JSON.parse(localStorage.getItem('users')) || [];
+
+        // DOM Elements
+        const loginForm = document.getElementById('login');
+        const registerForm = document.getElementById('register');
+        const showRegister = document.getElementById('showRegister');
+        const showLogin = document.getElementById('showLogin');
+        const loginContainer = document.getElementById('loginForm');
+        const registerContainer = document.getElementById('registerForm');
+        const dashboard = document.getElementById('dashboard');
+        const logoutBtn = document.getElementById('logout');
+        const usernameDisplay = document.getElementById('usernameDisplay');
+        const loginError = document.getElementById('loginError');
+        const registerError = document.getElementById('registerError');
+        const rememberMe = document.getElementById('remember');
+
+        // Toggle between Login and Register
+        showRegister.addEventListener('click', (e) => {
+            e.preventDefault();
+            loginContainer.style.display = 'none';
+            registerContainer.style.display = 'block';
+        });
+
+        showLogin.addEventListener('click', (e) => {
+            e.preventDefault();
+            registerContainer.style.display = 'none';
+            loginContainer.style.display = 'block';
+        });
+
+        // Password Strength Checker
+        function checkPasswordStrength(password) {
+            const strengthBar = password.includes('reg') ? document.getElementById('regStrengthBar') : document.getElementById('strengthBar');
+            let strength = 0;
+
+            if (password.length >= 8) strength++;
+            if (password.match(/[a-z]+/)) strength++;
+            if (password.match(/[A-Z]+/)) strength++;
+            if (password.match(/[0-9]+/)) strength++;
+            if (password.match(/[$@#&!]+/)) strength++;
+
+            // Remove all classes
+            strengthBar.className = 'password-strength-bar';
+            if (password) {
+                if (strength <= 2) {
+                    strengthBar.classList.add('strength-weak');
+                } else if (strength <= 4) {
+                    strengthBar.classList.add('strength-medium');
+                } else {
+                    strengthBar.classList.add('strength-strong');
+                }
+            }
+        }
+
+        // Show Error Message
+        function showError(element, message) {
+            element.textContent = message;
+            element.style.display = 'block';
+        }
+
+        function hideError(element) {
+            element.style.display = 'none';
+        }
+
+        // Register User
+        registerForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            hideError(registerError);
+
+            const username = document.getElementById('regUsername').value;
+            const password = document.getElementById('regPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            // Basic Validation
+            if (password !== confirmPassword) {
+                showError(registerError, "Passwords do not match!");
+                return;
+            }
+            if (password.length < 8) {
+                showError(registerError, "Password must be at least 8 characters long.");
+                return;
+            }
+            if (users.some(user => user.username === username)) {
+                showError(registerError, "Username already exists!");
+                return;
+            }
+
+            // Hashing is simulated here for practice. In a real app, use bcrypt.js or similar.
+            const hashedPassword = await hashPassword(password);
+
+            users.push({ username, password: hashedPassword });
+            localStorage.setItem('users', JSON.stringify(users));
+            alert("Registration successful! Please login.");
+            registerContainer.style.display = 'none';
+            loginContainer.style.display = 'block';
+        });
+
+        // Login User
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            hideError(loginError);
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Basic Validation
+            if (!username || !password) {
+                showError(loginError, "Please fill in all fields.");
+                return;
+            }
+
+            const hashedPassword = await hashPassword(password);
+            const user = users.find(user => user.username === username);
+
+            if (!user) {
+                showError(loginError, "Username not found.");
+                return;
+            }
+
+            const isPasswordValid = await bcryptCompare(password, user.password);
+            if (!isPasswordValid) {
+                showError(loginError, "Incorrect password.");
+                return;
+            }
+
+            // If login is successful
+            if (rememberMe.checked) {
+                localStorage.setItem('rememberedUser', username);
+            } else {
+                localStorage.removeItem('rememberedUser');
+            }
+
+            localStorage.setItem('currentUser', JSON.stringify(user));
+            document.querySelector('.container').style.display = 'none';
+            dashboard.style.display = 'block';
+            usernameDisplay.textContent = user.username;
+        });
+
+        // Logout
+        logoutBtn.addEventListener('click', () => {
+            localStorage.removeItem('currentUser');
+            localStorage.removeItem('rememberedUser');
+            dashboard.style.display = 'none';
+            document.querySelector('.container').style.display = 'flex';
+            loginContainer.style.display = 'block';
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+            hideError(loginError);
+        });
+
+        // Forgot Password (Placeholder)
+        document.getElementById('forgotPassword').addEventListener('click', (e) => {
+            e.preventDefault();
+            alert("Forgot password feature is not implemented. Please contact support.");
+        });
+
+        // Remember Me functionality
+        window.addEventListener('load', () => {
+            const rememberedUser = localStorage.getItem('rememberedUser');
+            if (rememberedUser) {
+                document.getElementById('username').value = rememberedUser;
+                rememberMe.checked = true;
+            }
+        });
+
+        // --- PRACTICE FUNCTIONS (SIMULATIONS) ---
+        // In a real app, you would use a library like 'crypto-js' or 'bcryptjs'.
+        // These are simplified for learning purposes.
+
+        async function hashPassword(password) {
+            // Simulate hashing delay
+            await new Promise(resolve => setTimeout(resolve, 100));
+            // Simple, insecure hash for demo. DO NOT USE IN PRODUCTION.
+            return btoa(password.split('').reverse().join(''));
+        }
+
+        async function bcryptCompare(plainPassword, hashedPassword) {
+            // Simulate comparison delay
+            await new Promise(resolve => setTimeout(resolve, 100));
+            // Simple, insecure comparison. DO NOT USE IN PRODUCTION.
+            return btoa(plainPassword.split('').reverse().join('')) === hashedPassword;
+        }
+    </script>
+</body>
+</html>
